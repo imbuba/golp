@@ -184,6 +184,12 @@ func (l *LP) SetAddRowMode(addRowMode bool) {
 	C.set_add_rowmode(l.ptr, boolToUChar(addRowMode))
 }
 
+// SetBounds specifies the lower and upper bound of a variable.
+// See http://lpsolve.sourceforge.net/5.5/set_bounds.htm
+func (l *LP) SetBounds(col int, low, upper float64) {
+	C.set_bounds(l.ptr, C.int(col+1), C.double(low), C.double(upper))
+}
+
 func boolToUChar(b bool) C.uchar {
 	if b {
 		return C.uchar(1)
